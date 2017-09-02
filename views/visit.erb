@@ -26,11 +26,11 @@ $('#color').simplecolorpicker();
       <div class="form-group">
     <label>Выбирите мастера:</label>
     <select name="barber" class="form-controll">
-      <option>Алла</option>
-      <option>Вика</option>
-      <option>Даша</option>
-      <option>Ира</option>
-      <option>Катя</option>
+      <option<%= @barber == 'Алла'? 'selected': '' %>>Алла</option>
+      <option<%= @barber == 'Вика'? 'selected': '' %>>Вика</option>
+      <option<%= @barber == 'Даша'? 'selected': '' %>>Даша</option>
+      <option <%= @barber == 'Ира'? 'selected': '' %>>Ира</option>
+      <option <%= @barber == 'Катя'? 'selected': '' %>>Катя</option>
     </select>
   </div>
   <div class="form-group">
