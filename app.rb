@@ -6,7 +6,8 @@ require 'sqlite3'
 
 configure do
 	db = get_db
-	db.execute 'CREATE TABLE IF NOT EXISTS "Users"
+	db.execute 'CREATE TABLE IF NOT EXISTS
+	"Users"
 	(
 	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
 	"username" TEXT,
@@ -67,11 +68,10 @@ post '/visit' do
 	barber,
 	color
 	)
-	values (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+	values ( ?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
 	
 	erb "OK, Имя посетителя #{@username}, телфон #{@phone}, указано время #{@datetime}, мастера #{@barber}, #{@color}."
 end
-
-def get_db
+	def get_db
 	return SQLite3::Database.new 'barbershop.db'
-end
+	end
