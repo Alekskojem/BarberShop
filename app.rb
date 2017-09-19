@@ -69,6 +69,10 @@ post '/visit' do
 	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 get '/showusers' do
+	db = get_db
+
+	@results = db.execute 'select * from Users order by id desc'
+	
 	erb :showusers
 end
 	
