@@ -69,6 +69,6 @@ post '/visit' do
 	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
 get '/showusers' do
-	erb "Hello World"
+	erb :showusers
 end
 	
