@@ -4,19 +4,23 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
+	end
 configure do
 	db = get_db
 	db.execute 'CREATE TABLE IF NOT EXISTS
-	"Users"
-	(
-	"id" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"username" TEXT,
-	"phone" TEXT,
-	"datestamp" TEXT,
-	"barber" TEXT,
-	"color" TEXT
-	)'
-
+		"Users"
+		(
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			username TEXT,
+			phone TEXT,
+			datestamp TEXT,
+			barber TEXT,
+			color TEXT
+		)'
 end
 
 get '/' do
@@ -54,24 +58,17 @@ post '/visit' do
 	#	return erb :visit
 	#end
 	@error = hh.select  {|key,_| params[key] == ""}.values.join(", ")
-	if @erro != ''
+	if @error != ''
 		return erb :visit
 	end
 
 	db = get_db
-	db.execute 'insert into
-	Users 
-	(
-	username,
-	phone,
-	datestamp,
-	barber,
-	color
-	)
-	values ( ?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+	db.execute 'insert into Users (username, phone, datestamp, barber, color)
+	 values ( ?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
 	
-	erb "OK, Имя посетителя #{@username}, телфон #{@phone}, указано время #{@datetime}, мастера #{@barber}, #{@color}."
+	erb "OK, username is #{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
 end
-	def get_db
-	return SQLite3::Database.new 'barbershop.db'
-	end
+get '/showusers' do
+	erb "Hello World"
+end
+	
