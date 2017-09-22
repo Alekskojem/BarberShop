@@ -14,12 +14,18 @@ configure do
 	db.execute 'CREATE TABLE IF NOT EXISTS
 		"Users"
 		(
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			username TEXT,
-			phone TEXT,
-			datestamp TEXT,
-			barber TEXT,
-			color TEXT
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"username" TEXT,
+			"phone" TEXT,
+			"datestamp" TEXT,
+			"barber" TEXT,
+			"color" TEXT
+		)'
+	db.execute 'CREATE TABLE IF NOT EXOSTS
+		"Barbers"
+		(
+		    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+		    "name" TEXT
 		)'
 end
 
