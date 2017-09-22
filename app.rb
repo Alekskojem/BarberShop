@@ -4,6 +4,15 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def is_barber_exists? db, name
+	db.execute('select *from Barbers where name=?', [name]).length > 0
+end
+def seed_db db, barbers
+	if !is_barber_exists? db, barber
+		bd.execute 'insert into Barbers (name) values (?)', [barber]
+	end
+end
+end
 def get_db
 	db = SQLite3::Database.new 'barbershop.db'
 	db.results_as_hash = true
@@ -27,6 +36,8 @@ configure do
 		    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
 		    "name" TEXT
 		)'
+
+	sedd_db db, ['Alla', 'Vika', 'Dasha', 'Ira', 'Katya']
 end
 
 get '/' do
